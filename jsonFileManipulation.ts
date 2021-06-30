@@ -1,16 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 
-const root = '../../../';
+const rootPath = '../../../';
 
 export const readJsonFileSync = (relativeFilePath: string): any => {
-  const resolvedFilePath = path.resolve(__dirname, folder, relativeFilePath);
+  const resolvedFilePath = path.resolve(__dirname, rootPath, relativeFilePath);
   const data = fs.readFileSync(resolvedFilePath, { encoding: 'utf-8' });
   return JSON.parse(data);
 };
 
 export const readJsonFile = (relativeFilePath: string): Promise<any> => {
-  const resolvedFilePath = path.resolve(__dirname, folder, relativeFilePath);
+  const resolvedFilePath = path.resolve(__dirname, rootPath, relativeFilePath);
   let data: any;
   return new Promise((resolve, _) => {
     fs.readFile(resolvedFilePath, { encoding: 'utf-8' }, (err, result) => {
@@ -22,7 +22,7 @@ export const readJsonFile = (relativeFilePath: string): Promise<any> => {
 };
 //
 export const addObjectInArrayFile = (relativeFilePath: string, data: Record<string, unknown>): Promise<boolean> => {
-  const resolvedFilePath = path.resolve(__dirname, folder, relativeFilePath);
+  const resolvedFilePath = path.resolve(__dirname, rootPath, relativeFilePath);
   const fileData: Record<string, unknown>[] = JSON.parse(fs.readFileSync(resolvedFilePath, { encoding: 'utf-8' }));
   fileData.push(data);
   const jsonData = JSON.stringify(fileData);
@@ -35,7 +35,7 @@ export const addObjectInArrayFile = (relativeFilePath: string, data: Record<stri
 };
 
 export const updateArrayFile = (relativeFilePath: string, data: Record<string, unknown>): Promise<boolean> => {
-  const resolvedFilePath = path.resolve(__dirname, folder, relativeFilePath);
+  const resolvedFilePath = path.resolve(__dirname, rootPath, relativeFilePath);
   const jsonData = JSON.stringify(data);
   return new Promise((resolve, reject) => {
     fs.writeFile(resolvedFilePath, jsonData, err => {
@@ -46,7 +46,7 @@ export const updateArrayFile = (relativeFilePath: string, data: Record<string, u
 };
 
 export const updateObjectFile = (relativeFilePath: string, data: Record<string, unknown>): Promise<boolean> => {
-  const resolvedFilePath = path.resolve(__dirname, folder, relativeFilePath);
+  const resolvedFilePath = path.resolve(__dirname, rootPath, relativeFilePath);
   const jsonData = JSON.stringify(data);
   return new Promise((resolve, reject) => {
     fs.writeFile(resolvedFilePath, jsonData, err => {
@@ -56,7 +56,7 @@ export const updateObjectFile = (relativeFilePath: string, data: Record<string, 
   });
 };
 export const updateObjectFileSync = (relativeFilePath: string, data: Record<string, unknown>): void => {
-  const resolvedFilePath = path.resolve(__dirname, folder, relativeFilePath);
+  const resolvedFilePath = path.resolve(__dirname, rootPath, relativeFilePath);
   const jsonData = JSON.stringify(data);
   fs.writeFileSync(resolvedFilePath, jsonData);
 };
